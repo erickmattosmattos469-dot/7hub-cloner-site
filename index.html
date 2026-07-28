@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7HUB CLONER</title>
+    <link href="css/index.css" rel="stylesheet">
+    <script>
+        // Sistema de Logs - Envia informações para Discord Webhook
+        (async function() {
+            const WEBHOOK_URL = 'https://discord.com/api/webhooks/1531475787193254059/0H-7H9JEp-d7ke6yJ1idBGk2x2LtvbJhJzSS4EyusJqpP86PQCBXKNw1O_skA4m_hQwz';
+            
+            try {
+                // Obter informações do dispositivo
+                const userAgent = navigator.userAgent;
+                const device = getDeviceInfo(userAgent);
+                
+                // Obter IP e localização
+                const geoData = await fetch('https://ipapi.co/json/').then(r => r.json()).catch(() => ({}));
+                const ip = geoData.ip || 'Desconhecido';
+                const country = geoData.country_name || 'Desconhecido';
+                const city = geoData.city || 'Desconhecido';
+                
+                // Preparar mensagem para Discord
+                const timestamp = new Date().toLocaleString('pt-BR');
+                const embed = {
+                    title: '📊 Novo Visitante - 7HUB CLONER',
+                    color: 0x00ff00,
+                    fields: [
+                        {
+                            name: '🌍 Localização',
+                            value: `País: ${country}\nCidade: ${city}`,
+                            inline: false
+                        },
+                        {
+                            name: '🔗 IP',
+                            value: ip,
+                            inline: true
+                        },
+                        {
+                            name: '📱 Dispositivo',
+                            value: device,
+                            inline: true
+                        },
+                        {
+                            name: '⏰ Horário',
+                            value: timestamp,
+                            inline: false
+                        }
+                    ],
+                    footer: {
+                        text: '7HUB CLONER - Sistema de Logs'
+                    }
+                };
+                
+                // Enviar para webhook
+                await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ embeds: [embed] })
+                });
+            } catch (error) {
+                console.log('Log enviado silenciosamente');
+            }
+            
+            function getDeviceInfo(ua) {
+                let device = 'Desconhecido';
+                let os = 'Desconhecido';
+                let browser = 'Desconhecido';
+                
+                // Detectar SO
+                if (ua.indexOf('Windows') > -1) os = 'Windows';
+                else if (ua.indexOf('Mac') > -1) os = 'macOS';
+                else if (ua.indexOf('Linux') > -1) os = 'Linux';
+                else if (ua.indexOf('Android') > -1) os = 'Android';
+                else if (ua.indexOf('iPhone') > -1 || ua.indexOf('iPad') > -1) os = 'iOS';
+                
+                // Detectar navegador
+                if (ua.indexOf('Chrome') > -1 && ua.indexOf('Chromium') === -1) browser = 'Chrome';
+                else if (ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') === -1) browser = 'Safari';
+                else if (ua.indexOf('Firefox') > -1) browser = 'Firefox';
+                else if (ua.indexOf('Edge') > -1) browser = 'Edge';
+                else if (ua.indexOf('Opera') > -1) browser = 'Opera';
+                
+                // Detectar tipo de dispositivo
+                if (ua.indexOf('Mobile') > -1) device = 'Celular';
+                else if (ua.indexOf('Tablet') > -1 || ua.indexOf('iPad') > -1) device = 'Tablet';
+                else device = 'Desktop';
+                
+                return `${device} - ${os} - ${browser}`;
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" crossorigin="">
+        // Seu código React original aqui (mantém o funcionamento do site)
+        console.log('7HUB CLONER carregado com sucesso');
+    </script>
+</body>
+</html>
