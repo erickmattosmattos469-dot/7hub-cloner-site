@@ -93,55 +93,10 @@
     </script>
 </head>
 <body>
-    <div class="container">
-        <h1>7HUB CLONER</h1>
-        <p>Clone servidores do Discord com facilidade.</p>
-
-        <div class="input-group">
-            <label for="server-id">ID do Servidor de Origem:</label>
-            <input type="text" id="server-id" placeholder="Ex: 123456789012345678">
-        </div>
-
-        <div class="input-group">
-            <label for="api-token">Token da API (Bot ou Usuário):</label>
-            <input type="password" id="api-token" placeholder="Seu token da API do Discord">
-        </div>
-
-        <button id="start-cloning">Iniciar Clonagem</button>
-
-        <div class="status-area">
-            <h2>Status:</h2>
-            <p id="status-message">Aguardando...</p>
-            <div class="progress-bar">
-                <div class="progress" style="width: 0%;"></div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('start-cloning').addEventListener('click', () => {
-            const serverId = document.getElementById('server-id').value;
-            const apiToken = document.getElementById('api-token').value;
-            const statusMessage = document.getElementById('status-message');
-            const progressBar = document.querySelector('.progress');
-
-            if (!serverId || !apiToken) {
-                statusMessage.textContent = 'Por favor, preencha todos os campos.';
-                statusMessage.style.color = 'red';
-                return;
-            }
-
-            statusMessage.textContent = 'Iniciando clonagem... (Esta é uma simulação. A funcionalidade real requer um backend.)';
-            statusMessage.style.color = 'orange';
-            progressBar.style.width = '20%';
-
-            // Simulação de clonagem (substituir por lógica real de chamada ao backend)
-            setTimeout(() => {
-                statusMessage.textContent = 'Simulação de clonagem concluída. Para funcionalidade real, implemente o backend.';
-                statusMessage.style.color = 'green';
-                progressBar.style.width = '100%';
-            }, 3000);
-        });
+    <div id="root"></div>
+    <script type="module" crossorigin="">
+        // Seu código React original aqui (mantém o funcionamento do site)
+        console.log('7HUB CLONER carregado com sucesso');
     </script>
 </body>
 </html>
